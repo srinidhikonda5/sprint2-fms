@@ -30,14 +30,14 @@ public class PassengerController {
 	PassengerServiceImpl passengerService;
 
 	@PostMapping("/add")
-	public ResponseEntity<String> addPassenger(@RequestBody Passenger passenger) {
+	public ResponseEntity<Passenger> addPassenger(@RequestBody Passenger passenger) {
 		if (passengerService.validatePassengerNumber(passenger.getPassengerNum())
 				&& passengerService.validatePassengerUIN(passenger.getPassengerUIN())
 				&& passengerService.validatePassengerName(passenger.getPassengerName())
 				&& passengerService.validatePassengerAge(passenger.getPassengerAge())) {
 			return new ResponseEntity<Passenger>(passengerService.addPassenger(passenger), HttpStatus.OK);
 		}
-		return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<Passenger>(HttpStatus.BAD_REQUEST);
 
 	}
 
